@@ -1,0 +1,10 @@
+cd C:\...\vitriBackend-semillero
+.venv\Scripts\activate
+
+python -m pip install --upgrade pip setuptools wheel
+
+:: Primero asegura greenlet con wheel:
+pip install --only-binary=:all: "greenlet>=3.1"
+
+:: Luego el resto (evitar compilaciones cuando se pueda):
+pip install --only-binary=:all: -r requirements.txt
