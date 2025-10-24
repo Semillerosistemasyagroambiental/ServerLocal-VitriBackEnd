@@ -14,3 +14,4 @@ call .venv\Scripts\activate
 cd app
 set FLASK_APP=app.py
 start /min "Backend" cmd /k "flask run --debug"
+ 
