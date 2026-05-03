@@ -18,20 +18,22 @@ from routes.authentication.autenticacion import autenticacion  # Importación de
 # -------------------------------------------------------------------------------------------------------- #
 app = Flask(__name__)
 CORS(app)
-4
 # -------------------------------------------------------------------------------------------------------- #
 # Configuración de la conexión de SQLAlchemy a la Base de Datos
 # -------------------------------------------------------------------------------------------------------- #
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:1066@localhost/vitridb?charset=utf8mb4"
-os.getenv("DATABASE_URL")
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv(
+    "DATABASE_URL",
+    "mysql+pymysql://root:1066@localhost/vitridb?charset=utf8mb4"
+)
+
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ECHO"] = True  # Habilitar el echo para ver las sentencias SQL
 
 # -------------------------------------------------------------------------------------------------------- #
 # JSon Web Token (JWT) configuracion
 # -------------------------------------------------------------------------------------------------------- #
-app.config['JWT_SECRET_KEY'] = 'iDJa44PZXLrQ6X396ZKYE8WGXG4Gt2LFE3fyV0TinuTtBnzabGhp6167VFwJPuz2qbv3M8ueG78PTTryHKyacfUc28T9Pm92aztY'
+app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY")
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=6)
 
 jwt = JWTManager(app)
